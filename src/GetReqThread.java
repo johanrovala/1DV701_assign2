@@ -18,10 +18,18 @@ public class GetReqThread extends Thread{
 
     @Override
     public void run() {
+        System.out.println("runs");
         outPut.println("HTTP/1.1 200 OK");
         outPut.println("Content-Type: text/html");
         outPut.println("\r\n");
         outPut.println("<p> Hello world </p>");
         outPut.flush();
+        outPut.close();
+
+        try {
+            client.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
