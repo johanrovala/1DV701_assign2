@@ -15,6 +15,13 @@ public abstract class HTTPResponse
     private String entityHeaders;
     private String messageBod;
 
+    /**
+     * Constructor of the type of response to be send
+     * @param status
+     * @param contentType
+     * @param contentLen
+     * @param messBody
+     */
     public HTTPResponse(String status, CONTENT_TYPE contentType, int contentLen, String messBody)
     {
         statusLine = "HTTP/1.1" + " " + status + "\n";
