@@ -7,7 +7,7 @@ public class HTTPResponse
     private String statusLine;
     private String generalHeaders;
     private String entityHeaders;
-    private String messageBody;
+    private String messageBod;
 
 
 
