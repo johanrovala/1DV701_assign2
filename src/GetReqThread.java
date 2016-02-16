@@ -33,13 +33,13 @@ public class GetReqThread extends Thread{
         }
         String req = new String(buf);
         System.out.println(req);
-        File file = new File("src/html/index.html");
+        File file = new File("src/main.html/index.main.html");
         System.out.println("runs");
 
 
 
       //  outPut.println("HTTP/1.1 200 OK");
-      //  outPut.println("Content-Type: text/html");
+      //  outPut.println("Content-Type: text/main.html");
       //  outPut.println("\r\n");
       //  outPut.println("<p> Hello world </p>");
 
