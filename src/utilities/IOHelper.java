@@ -1,6 +1,8 @@
 package utilities;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Created by Jakob on 2016-02-16.
@@ -24,5 +26,26 @@ public class IOHelper
     {
         //TODO - UNIMPLEMENTED
         return "";
+    }
+
+    public String readContentOfFile(String path) throws FileNotFoundException
+    {
+        File file = new File(path);
+        if (file.exists())
+        {
+            String out = "";
+            Scanner fileScan = new Scanner(file);
+            while (fileScan.hasNextLine())
+            {
+                out += fileScan.nextLine() + "\n";
+            }
+            out.substring(0, out.length() - 1);     //Removing last new line character
+            return out;
+        }
+        else
+        {
+            System.err.print("Error reading content of file\n");
+        }
+        return null;
     }
 }

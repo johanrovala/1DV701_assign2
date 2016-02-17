@@ -1,6 +1,8 @@
 import org.junit.Test;
 import utilities.IOHelper;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -25,4 +27,5 @@ public class IOHelperTest
         boolean actualRes = helper.fileExist("src/png/austinworshippingsatan.png");
         assertEquals("IO helper has fault in method for seeing if file exist", expected, actualRes);
     }
+
 }
