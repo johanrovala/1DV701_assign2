@@ -17,7 +17,7 @@ public class HTTPRequest {
 
     public String getMethodType(){
         for(Object o : HTTP_RequestType.values()){
-            if(requestLine.toLowerCase().contains(o.toString())){
+            if(requestLine.toLowerCase().contains(o.toString().toLowerCase())){
                 methodType = o.toString();
             }
         }
@@ -26,14 +26,42 @@ public class HTTPRequest {
 
     public String getPath(){
         char[] split = requestLine.toCharArray();
+        int start = 0;
+        int end = 0;
 
         for(int i = 0; i < split.length; i++) {
             if (split[i] == '/') {
-
+                start = i;
+                break;
             }
         }
-        return "";
+        for(int j = start; j < split.length; j++){
+            if(split[j] == ' '){
+                end = j;
+                break;
+            }
+        }
+
+        domain = requestLine.substring(start, end);
+        return domain;
     }
+
+    public String getOptions(){
+        char[] split = requestLine.toCharArray();
+        int start = 0;
+        int end = requestLine.length();
+
+        for(int i = 0; i < split.length; i++){
+            if(split[i] == 'H'){
+                start = i;
+                break;
+            }
+        }
+        options = requestLine.substring(start, end);
+        return options;
+    }
+
+
 
 
 

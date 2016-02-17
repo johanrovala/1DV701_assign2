@@ -1,3 +1,5 @@
+import utilities.IOHelper;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -15,12 +17,15 @@ public class GetReqThread extends Thread{
     byte[] buf = new byte[100];
     CharSequence cs1 = "GET";
     private String methodRequest;
+    private HTTPRequest httpRequest;
+    private IOHelper ioHelper;
     // datainputstream för att hämta get req?
 
     public GetReqThread(Socket s) throws IOException {
         client = s;
         outPut = new PrintWriter(client.getOutputStream());
         dataInputStream = new DataInputStream(client.getInputStream());
+        ioHelper = new IOHelper();
     }
 
     @Override
@@ -32,9 +37,14 @@ public class GetReqThread extends Thread{
             e.printStackTrace();
         }
         String req = new String(buf);
-        System.out.println(req);
-        File file = new File("src/main.html/index.main.html");
-        System.out.println("runs");
+        httpRequest = new HTTPRequest(req);
+       // System.out.println(req);
+        System.out.println("Method type " +httpRequest.getMethodType());
+        System.out.println("Path " + httpRequest.getPath());
+        System.out.println("Options " +httpRequest.getOptions());
+        System.out.println(ioHelper.fileExist(httpRequest.getPath()));
+       // File file = new File("src/main.html/index.main.html");
+       // System.out.println("runs");
 
 
 
@@ -42,13 +52,13 @@ public class GetReqThread extends Thread{
       //  outPut.println("Content-Type: text/main.html");
       //  outPut.println("\r\n");
       //  outPut.println("<p> Hello world </p>");
-
+/*
         try {
             outPut.println(readFile(file.getAbsolutePath(), Charset.defaultCharset()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
        // outPut.flush();
        // outPut.close();
 

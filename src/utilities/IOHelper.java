@@ -8,8 +8,10 @@ import java.io.File;
  */
 public class IOHelper
 {
+    private String addOnToPathFile = "src";
     public boolean fileExist(String pathToFile)
     {
+        pathToFile = addOnToPathFile + pathToFile;
         File file = new File(pathToFile);
         return file.exists();
     }
