@@ -1,7 +1,5 @@
 package response;
 
-import response_old.*;
-
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -17,10 +15,10 @@ public class HTTPHeader
 
     public HTTPHeader(String status, boolean keep_alive_in, HTTPBody body)
     {
-        statusLine = "HTTP/1.1" + " " + status + "\n";
+        statusLine = status + "\n";
         generalHeaders = setupGeneralHeader(keep_alive_in);
         entityHeaders = "Content-Type: " + body.getType().toString();
-        entityHeaders += "\nContent-Length: " + body.noBytes();
+        entityHeaders += "\nContent-Length: " + body.noBytes() + "\n";
     }
 
     public byte[] toBytes() {return toString().getBytes();}

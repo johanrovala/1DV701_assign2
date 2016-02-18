@@ -31,11 +31,11 @@ public class Client {
         return request;
     }
 
-    public void writeHeader(HTTPResponse response) throws IOException {
-
-    }
-
-    public void writeFile(File file){
-
-    }
+//    public void writeHeader(HTTPResponse response) throws IOException {
+//
+//    }
+//
+//    public void writeFile(File file){
+//
+//    }
 }

@@ -40,8 +40,8 @@ public class Session extends Thread{
         Request request = requestParser.getRequest();
 
         RequestValidator requestValidator = new RequestValidator(request);
-        HTTPResponse response = requestValidator.getResponse();
-        response.writeToClient(this.client);
+//        HTTPResponse response = requestValidator.getResponse();
+//        response.writeToClient(this.client);
 
 
         /*HTTPResponse httpResponse = new HTTPResponse("200 OK", CONTENT_TYPE.PNG, 20 ) {};

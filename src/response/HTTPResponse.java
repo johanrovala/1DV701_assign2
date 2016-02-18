@@ -26,8 +26,8 @@ public abstract class HTTPResponse
 
     public String toString()
     {
-        String out = "Header: " + "\n" + header.toString();
-        System.out.println("Body: " +
-                "\n" + body.toString());
+        String out = header.toString();
+        out += body.toString();
+        return out;
     }
 }

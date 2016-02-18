@@ -12,9 +12,11 @@ public class HTTPBody
 {
     private byte[] body;
     private CONTENT_TYPE type;
+    private String stringBody;
 
     public HTTPBody(String bodyIn, CONTENT_TYPE typeIn)
     {
+        stringBody = bodyIn;
         type = typeIn;
         body = bodyIn.getBytes();
     }
@@ -33,6 +35,11 @@ public class HTTPBody
     public int noBytes()
     {
         return body.length;
+    }
+
+    public String toString()
+    {
+        return stringBody;
     }
 
     public byte[] getBody()

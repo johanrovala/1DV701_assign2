@@ -14,7 +14,7 @@ public class R200OK extends HTTPResponse
         super(STATUS, typeIn, bodyStr, keep_alive);
     }
 
-    public R200OK(String status, Path pathToFile, CONTENT_TYPE typeIn, boolean keep_alive) throws IOException
+    public R200OK(Path pathToFile, CONTENT_TYPE typeIn, boolean keep_alive) throws IOException
     {
         super(STATUS, typeIn, pathToFile, keep_alive);
     }
