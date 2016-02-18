@@ -1,6 +1,14 @@
 package request;
 
+import response.CONTENT_TYPE;
+import response.HTTPResponse;
+import response.R200OK;
 import utilities.IOHelper;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by johanrovala on 17/02/16.
@@ -13,6 +21,7 @@ public class RequestValidator {
 
     IOHelper ioHelper;
     Request request;
+    CONTENT_TYPE type;
 
     public RequestValidator(Request request){
         this.request = request;
@@ -35,13 +44,16 @@ public class RequestValidator {
         return requestType.equals(HTTP_RequestType.PUT);
     }
 
-/*
-    public HTTPResponse getResponse(){
+
+    public HTTPResponse getResponse() throws IOException {
+
+        System.out.println("debug");
         if(fileExists(request.getPath())){
-            return new Response200(new File(request.getPath()));
-        }else if(!fileExists(request.getPath())){
-            return new Response400();
-        }
+            return new R200OK(Paths.get(request.getPath()), CONTENT_TYPE.HTML, true);
+        }//else if(!fileExists(request.getPath()))
+           // return new Response400();
+       // }
+        System.out.println(request.getPath());
+        return new R200OK(Paths.get(request.getPath()), CONTENT_TYPE.HTML, true);
     }
-*/
 }

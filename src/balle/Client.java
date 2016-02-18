@@ -1,5 +1,7 @@
 package balle;
 
+import response.HTTPResponse;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -32,11 +34,16 @@ public class Client {
         return request;
     }
 
-//    public void writeHeader(HTTPResponse response) throws IOException {
-//
-//    }
-//
-//    public void writeFile(File file){
-//
-//    }
+    public void sendResponseToClient(HTTPResponse response) throws IOException {
+        clientOutPut.write(response.getBytes()[0]);
+        clientOutPut.write(response.getBytes()[1]);
+    }
+
+   /* public void writeHeader(HTTPResponse response) throws IOException {
+
+    }
+
+    public void writeFile(File file){
+
+    }*/
 }

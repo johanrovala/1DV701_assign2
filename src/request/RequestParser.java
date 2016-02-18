@@ -63,7 +63,7 @@ public class RequestParser {
     }
 
     public Request getRequest(){
-        return new Request(requestType, path, protocol);
+        return new Request(path, requestType, protocol);
     }
 
 

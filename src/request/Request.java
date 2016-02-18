@@ -12,8 +12,8 @@ public class Request {
     private String protocol;
 
     public Request(String path, String requestType, String protocol){
-        this.requestType = requestType;
         this.path = path;
+        this.requestType = requestType;
         this.protocol = protocol;
     }
 
