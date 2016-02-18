@@ -1,15 +1,21 @@
 package response;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
 /**
- * Created by Jakob on 2016-02-16.
- * Creates an 200 OK response
+ * Created by Steve on 2016-02-18.
  */
-/*
 public class R200OK extends HTTPResponse
 {
-    public R200OK(String messageBody, CONTENT_TYPE type)
+    public static final String STATUS = "HTTP/1.1 200 OK";
+    public R200OK(String bodyStr, CONTENT_TYPE typeIn, boolean keep_alive) throws IOException
     {
-        super("200 OK", type, messageBody.getBytes().length);
+        super(STATUS, typeIn, bodyStr, keep_alive);
+    }
+
+    public R200OK(String status, Path pathToFile, CONTENT_TYPE typeIn, boolean keep_alive) throws IOException
+    {
+        super(STATUS, typeIn, pathToFile, keep_alive);
     }
 }
-*/

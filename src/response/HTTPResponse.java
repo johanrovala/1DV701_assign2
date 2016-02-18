@@ -1,60 +1,33 @@
 package response;
 
-import balle.Client;
-import com.sun.deploy.util.SessionState;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.io.IOException;
+import java.nio.file.Path;
 
 /**
- * Created by Jakob on 2016-02-16.
- * A class creating HTTP responses for HTTP 1.1
+ * Created by Steve on 2016-02-18.
  */
 public abstract class HTTPResponse
 {
-    private String statusLine;
-    private String generalHeaders;
-    //Currently no response header
-    private String entityHeaders;
-    private String messageBod;
+    private HTTPHeader header;
+    private HTTPBody body;
 
-    public HTTPResponse(){
-
-    }
-
-    /**
-     * Constructor of the type of response to be send
-     * @param status
-     * @param contentType
-     * @param contentLen
-    // * @param messBody
-     */
-    public HTTPResponse(String status, CONTENT_TYPE contentType, int contentLen)
+    public HTTPResponse(String status, CONTENT_TYPE contentType, String messBody, boolean keep_alive) throws IOException
     {
-        statusLine = "HTTP/1.1" + " " + status + "\n";
-        generalHeaders = setupGeneralHeader();
-        entityHeaders = "Content-Type: " + contentType.toString();
-        entityHeaders += "\nContent-Length: " + contentLen;
-       // messageBod = "\n" + messBody; //First new line due to http response format
+        body = new HTTPBody(messBody, contentType);
+        header = new HTTPHeader(status, keep_alive, body);
     }
 
-
-    public String toString() {return statusLine + generalHeaders + entityHeaders;}
-
-    private String setupGeneralHeader()
+    public HTTPResponse(String status, CONTENT_TYPE contentType, Path pathToFile, boolean keep_alive) throws IOException
     {
-        String out = "Date: " + getDate();
-        out += "\nConnection: close\n";
-        return out;
+        body = new HTTPBody(pathToFile, contentType);
+        header = new HTTPHeader(status, keep_alive, body);
     }
 
-    public String getDate()
+    public String toString()
     {
-        GregorianCalendar cal = new GregorianCalendar();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss z");
-        return sdf.format(cal.getTime());
+        String out = "Header: " + "\n" + header.toString();
+        System.out.println("Body: " +
+                "\n" + body.toString());
     }
-
-    public abstract void writeToClient(Client client);
 }

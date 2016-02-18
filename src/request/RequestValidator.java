@@ -1,11 +1,6 @@
 package request;
 
-import response.HTTPResponse;
-import response.Response200;
-import response.Response400;
 import utilities.IOHelper;
-
-import java.io.File;
 
 /**
  * Created by johanrovala on 17/02/16.

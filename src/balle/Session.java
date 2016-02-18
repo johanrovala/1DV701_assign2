@@ -3,7 +3,6 @@ package balle;
 import request.Request;
 import request.RequestParser;
 import request.RequestValidator;
-import response.HTTPResponse;
 
 import java.io.*;
 import java.net.Socket;
