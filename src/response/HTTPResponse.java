@@ -1,8 +1,10 @@
 package response;
 
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  * Created by Steve on 2016-02-18.
@@ -28,6 +30,12 @@ public abstract class HTTPResponse
     {
         String out = header.toString();
         out += body.toString();
+        return out;
+    }
+
+    public byte[][] getBytes()
+    {
+        byte[][] out = {header.toBytes(), body.getBody()};
         return out;
     }
 }

@@ -13,7 +13,8 @@ public class Client {
     PrintWriter printWriter;
     private byte[] buf;
 
-    public Client(Socket socket) throws IOException {
+    public Client(Socket socket) throws IOException
+    {
         this.client = socket;
         clientOutPut = client.getOutputStream();
         this.printWriter = new PrintWriter(clientOutPut);
