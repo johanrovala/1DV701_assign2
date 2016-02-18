@@ -7,6 +7,6 @@ public class R404NotFound extends HTTPResponse
 {
     public R404NotFound(String messageBody, CONTENT_TYPE type)
     {
-        super("404 Forbidden", type, messageBody.getBytes().length, messageBody);
+        super("404 Forbidden", type, messageBody.getBytes().length);
     }
 }

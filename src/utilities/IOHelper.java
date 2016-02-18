@@ -10,10 +10,9 @@ import java.util.Scanner;
  */
 public class IOHelper
 {
-    private String addOnToPathFile = "src";
     public boolean fileExist(String pathToFile)
     {
-        pathToFile = addOnToPathFile + pathToFile;
+        pathToFile = "src" + pathToFile;
         File file = new File(pathToFile);
         return file.exists();
     }

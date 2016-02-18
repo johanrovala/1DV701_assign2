@@ -1,5 +1,9 @@
 package response;
 
+import balle.Client;
+import com.sun.deploy.util.SessionState;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -15,25 +19,28 @@ public abstract class HTTPResponse
     private String entityHeaders;
     private String messageBod;
 
+    public HTTPResponse(){
+
+    }
+
     /**
      * Constructor of the type of response to be send
      * @param status
      * @param contentType
      * @param contentLen
-     * @param messBody
+    // * @param messBody
      */
-    public HTTPResponse(String status, CONTENT_TYPE contentType, int contentLen, String messBody)
+    public HTTPResponse(String status, CONTENT_TYPE contentType, int contentLen)
     {
         statusLine = "HTTP/1.1" + " " + status + "\n";
         generalHeaders = setupGeneralHeader();
         entityHeaders = "Content-Type: " + contentType.toString();
         entityHeaders += "\nContent-Length: " + contentLen;
-        messageBod = "\n" + messBody; //First new line due to http response format
+       // messageBod = "\n" + messBody; //First new line due to http response format
     }
 
 
-
-    public String toString() {return statusLine + generalHeaders + entityHeaders + "\n" + messageBod;}
+    public String toString() {return statusLine + generalHeaders + entityHeaders;}
 
     private String setupGeneralHeader()
     {
@@ -48,4 +55,6 @@ public abstract class HTTPResponse
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss z");
         return sdf.format(cal.getTime());
     }
+
+    public abstract void writeToClient(Client client);
 }

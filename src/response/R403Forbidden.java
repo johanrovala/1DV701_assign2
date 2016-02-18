@@ -8,6 +8,6 @@ public class R403Forbidden extends HTTPResponse
 {
     public R403Forbidden(String messageBody, CONTENT_TYPE type)
     {
-        super("403 Forbidden", type, messageBody.getBytes().length, messageBody);
+        super("403 Forbidden", type, messageBody.getBytes().length);
     }
 }

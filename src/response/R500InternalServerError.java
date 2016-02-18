@@ -7,6 +7,6 @@ public class R500InternalServerError extends HTTPResponse
 {
     public R500InternalServerError(String messageBody, CONTENT_TYPE type)
     {
-        super("500 Internal server error", type, messageBody.getBytes().length, messageBody);
+        super("500 Internal server error", type, messageBody.getBytes().length);
     }
 }

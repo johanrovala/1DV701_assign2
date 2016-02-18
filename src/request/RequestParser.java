@@ -1,27 +1,28 @@
-import java.util.ArrayList;
+package request;
 
 /**
  * Created by johanrovala on 16/02/16.
  */
-public class HTTPRequest {
+public class RequestParser {
 
     private String requestLine;
 
-    private String methodType;
-    private String domain;
-    private String options;
+    private String requestType;
+    private String path = "";
+    private String protocol;
 
-    public HTTPRequest(String line){
-        requestLine = line;
+
+    public void setRequestLine(String request){
+        requestLine = request;
     }
 
     public String getMethodType(){
         for(Object o : HTTP_RequestType.values()){
             if(requestLine.toLowerCase().contains(o.toString().toLowerCase())){
-                methodType = o.toString();
+                requestType = o.toString();
             }
         }
-        return methodType;
+        return requestType;
     }
 
     public String getPath(){
@@ -42,8 +43,8 @@ public class HTTPRequest {
             }
         }
 
-        domain = requestLine.substring(start, end);
-        return domain;
+        path = "src" + requestLine.substring(start, end);
+        return path;
     }
 
     public String getOptions(){
@@ -57,8 +58,12 @@ public class HTTPRequest {
                 break;
             }
         }
-        options = requestLine.substring(start, end);
-        return options;
+        protocol = requestLine.substring(start, end);
+        return protocol;
+    }
+
+    public Request getRequest(){
+        return new Request(requestType, path, protocol);
     }
 
 
