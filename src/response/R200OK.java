@@ -9,6 +9,7 @@ import java.nio.file.Path;
 public class R200OK extends HTTPResponse
 {
     public static final String STATUS = "HTTP/1.1 200 OK";
+
     public R200OK(String bodyStr, CONTENT_TYPE typeIn, boolean keep_alive) throws IOException
     {
         super(STATUS, typeIn, bodyStr, keep_alive);

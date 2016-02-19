@@ -1,5 +1,7 @@
 package request;
 
+import response.CONTENT_TYPE;
+
 /**
  * Created by johanrovala on 16/02/16.
  */
@@ -65,11 +67,4 @@ public class RequestParser {
     public Request getRequest(){
         return new Request(path, requestType, protocol);
     }
-
-
-
-
-
-
-
 }

@@ -1,13 +1,10 @@
 package request;
 
-import response.CONTENT_TYPE;
-import response.HTTPResponse;
-import response.R200OK;
+import response.*;
 import utilities.IOHelper;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -15,13 +12,12 @@ import java.nio.file.Paths;
  */
 public class RequestValidator {
 
-    /**
+    /*
      * Fields
      */
 
     IOHelper ioHelper;
     Request request;
-    CONTENT_TYPE type;
 
     public RequestValidator(Request request){
         this.request = request;
@@ -30,6 +26,10 @@ public class RequestValidator {
 
     private boolean fileExists(String path){
         return ioHelper.fileExist(path);
+    }
+
+    private boolean isAllowedDir(String path){
+        return ioHelper.isAllowedDir(path);
     }
 
     private boolean isGet(String requestType){
@@ -47,13 +47,29 @@ public class RequestValidator {
 
     public HTTPResponse getResponse() throws IOException {
 
-        System.out.println("debug");
-        if(fileExists(request.getPath())){
-            return new R200OK(Paths.get(request.getPath()), CONTENT_TYPE.HTML, true);
-        }//else if(!fileExists(request.getPath()))
-           // return new Response400();
-       // }
-        System.out.println(request.getPath());
-        return new R200OK(Paths.get(request.getPath()), CONTENT_TYPE.HTML, true);
+        if(fileExists(request.getPath()) && isAllowedDir(request.getPath())){
+            return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
+        }
+        else if(!fileExists(request.getPath())){
+            return new R404NOTFOUND(true);
+        }
+        else if(!isAllowedDir(request.getPath())){
+            return new R403FORBIDDEN(true);
+        }else {
+            return new R500INTERNALSERVERERROR(true);
+        }
+    }
+
+
+    private CONTENT_TYPE getContentType(String pathOfFile){
+        String test = ioHelper.getFileEnding(pathOfFile);
+
+        for (CONTENT_TYPE t : CONTENT_TYPE.values()){
+
+            if(t.toString().endsWith(test)){
+                return t;
+            }
+        }
+        return CONTENT_TYPE.unknown;
     }
 }

@@ -38,12 +38,4 @@ public class Client {
         clientOutPut.write(response.getBytes()[0]);
         clientOutPut.write(response.getBytes()[1]);
     }
-
-   /* public void writeHeader(HTTPResponse response) throws IOException {
-
-    }
-
-    public void writeFile(File file){
-
-    }*/
 }

@@ -1,5 +1,8 @@
 package utilities;
 
+import response.AVAILABLE_DIR;
+import response.CONTENT_TYPE;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -12,7 +15,6 @@ public class IOHelper
 {
     public boolean fileExist(String pathToFile)
     {
-        pathToFile = "src" + pathToFile;
         File file = new File(pathToFile);
         return file.exists();
     }
@@ -46,5 +48,33 @@ public class IOHelper
             System.err.print("Error reading content of file\n");
         }
         return null;
+    }
+
+    public String getFileEnding(String pathOfFile)
+    {
+        int i = pathOfFile.length() -1;
+        boolean foundEnding = false;
+        while (i >= 0 && !foundEnding)
+        {
+            char temp = pathOfFile.charAt(i);
+            if (!Character.isAlphabetic(temp))
+            {
+                return pathOfFile.substring(i+1);
+            }
+            i--;
+        }
+        return null;
+    }
+
+    public boolean isAllowedDir(String pathOfFile){
+        String allowedPath = "src/";
+
+        for(AVAILABLE_DIR d : AVAILABLE_DIR.values()){
+            if (pathOfFile.startsWith(allowedPath+d.toString())){
+                return true;
+            }
+        }
+
+        return false;
     }
 }
