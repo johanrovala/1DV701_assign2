@@ -20,22 +20,27 @@ public class Client {
         this.client = socket;
         clientOutPut = client.getOutputStream();
         this.printWriter = new PrintWriter(clientOutPut);
-        buf = new byte[100];
+        buf = new byte[1024];
     }
 
-    public void close() throws IOException {
+    public void close() throws IOException
+    {
         this.client.close();
     }
 
-    public String getRequestFromClient() throws IOException {
+    public String getInputFromSockStream() throws IOException
+    {
         InputStream inputStream = client.getInputStream();
         inputStream.read(buf);
         String request = new String(buf);
+        System.out.println("\n\nThe actual request from the stream: \n" + request + "\n\n" );
         return request;
     }
 
-    public void sendResponseToClient(HTTPResponse response) throws IOException {
-        clientOutPut.write(response.getBytes()[0]);
-        clientOutPut.write(response.getBytes()[1]);
+    public void sendResponseToClient(HTTPResponse response) throws IOException
+    {
+        clientOutPut.write(response.getBytes()[0]);     //Header
+        clientOutPut.write(response.getBytes()[1]);     //Body
     }
+
 }

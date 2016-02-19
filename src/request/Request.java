@@ -5,7 +5,8 @@ import java.net.Authenticator;
 /**
  * Created by johanrovala on 18/02/16.
  */
-public class Request {
+public class Request
+{
 
     private String requestType;
     private String path;
@@ -26,5 +27,10 @@ public class Request {
     public String getRequestType() { return requestType; }
 
     public String getProtocol() { return protocol; }
+
+    public String toString()
+    {
+        return "Request type: " + requestType + "\nPath: " + path + "\nProtocol: " + protocol;
+    }
 
 }

@@ -15,44 +15,36 @@ public class Session extends Thread{
 
     Client client;
     private RequestParser requestParser;
-    private RequestValidator requestValidator;
-    private OutputStream outputStream;
 
-    public Session(Socket s) throws IOException {
+    public Session(Socket s) throws IOException
+    {
         client = new Client(s);
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
 
+        try { requestParser = new RequestParser(client.getInputFromSockStream());}
+        catch (IOException e) {e.printStackTrace();}
 
-
-        try {
-            requestParser = new RequestParser();
-            requestParser.setRequestLine(client.getRequestFromClient());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Method type " +requestParser.getMethodType());
-        System.out.println("Path " + requestParser.getPath());
-        System.out.println("Options " +requestParser.getOptions());
 
         Request request = requestParser.getRequest();
+        System.out.println("\n\nThe request object: \n" + request.toString() + "\n\n");
 
         RequestValidator requestValidator = new RequestValidator(request);
         HTTPResponse response;
-        try {
+        try
+        {
             response = requestValidator.getResponse();
             client.sendResponseToClient(response);
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            System.out.println("Probably browser try to access logo but");
         }
 
-        try {
-            client.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        try  {  client.close();}
+        catch (IOException e) {e.printStackTrace();}
     }
 }

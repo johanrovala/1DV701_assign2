@@ -3,8 +3,9 @@ package request;
 import response.*;
 import utilities.IOHelper;
 
-
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -12,7 +13,7 @@ import java.nio.file.Paths;
  */
 public class RequestValidator {
 
-    /*
+    /**
      * Fields
      */
 
@@ -26,10 +27,6 @@ public class RequestValidator {
 
     private boolean fileExists(String path){
         return ioHelper.fileExist(path);
-    }
-
-    private boolean isAllowedDir(String path){
-        return ioHelper.isAllowedDir(path);
     }
 
     private boolean isGet(String requestType){
@@ -47,21 +44,31 @@ public class RequestValidator {
 
     public HTTPResponse getResponse() throws IOException {
 
-        if(fileExists(request.getPath()) && isAllowedDir(request.getPath())){
+        if(fileExists(request.getPath()) && ioHelper.isAllowedDir(request.getPath()))
+        {
+            System.out.println("File with path " + request.getPath() + " exists and gets returned." );
             return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
         }
-        else if(!fileExists(request.getPath())){
+        else if(!ioHelper.isAllowedDir(request.getPath()))
+        {
+            System.out.println("\nUser try to access a file that it is not allowed to access with path name" +
+                    request.getPath() + "\n\n");
+            return new R403FORBIDDEN(true);
+        }
+        else if(!fileExists(request.getPath()))
+        {
+            System.out.println("\nAn file that is not allowed for browser got a request for access but denied\n" +
+                    "The file name is: " + request.getPath());
             return new R404NOTFOUND(true);
         }
-        else if(!isAllowedDir(request.getPath())){
-            return new R403FORBIDDEN(true);
-        }else {
+        else
+        {
             return new R500INTERNALSERVERERROR(true);
         }
     }
 
-
-    private CONTENT_TYPE getContentType(String pathOfFile){
+    private CONTENT_TYPE getContentType(String pathOfFile)
+    {
         String test = ioHelper.getFileEnding(pathOfFile);
 
         for (CONTENT_TYPE t : CONTENT_TYPE.values()){
