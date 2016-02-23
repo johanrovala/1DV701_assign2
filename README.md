@@ -6,7 +6,7 @@
 -4 DONE
 
 -5 DONE
--6 Ändra om och testa dir-struktur efter anvisningar på uppgiftsbeskrivningen. 
+-6 DONE
 -7 Fler resp codes
 -8 POST and PUT
 
