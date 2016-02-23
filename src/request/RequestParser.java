@@ -70,6 +70,9 @@ public class RequestParser
             }
         }
         path = "src" + requestLine.substring(start, end);
+        if (path.endsWith("/")){
+            path = path.substring(0, path.length()-1);
+        }
         return path;
     }
 
