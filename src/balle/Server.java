@@ -1,6 +1,7 @@
 package balle;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,6 +17,7 @@ public class Server
     {
 
         serverSocket = new ServerSocket(PORT);
+        System.out.println(serverSocket.getLocalSocketAddress());
 
         while (true)
         {
