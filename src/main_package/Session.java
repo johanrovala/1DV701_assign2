@@ -10,6 +10,9 @@ import java.net.Socket;
 
 /**
  * Created by johanrovala on 15/02/16.
+ *
+ * This class represents a client running on the server.
+ * With each new client another instance of this class is created.
  */
 public class Session extends Thread{
 

@@ -4,6 +4,7 @@ import java.net.Authenticator;
 
 /**
  * Created by johanrovala on 18/02/16.
+ * Basic model class for a Request
  */
 public class Request
 {

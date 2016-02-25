@@ -4,6 +4,7 @@ import java.io.IOException;
 
 /**
  * Created by johanrovala on 19/02/16.
+ * If directory is not listed in AVAILABE_DIR, an instance of this class is created.
  */
 public class R403FORBIDDEN extends HTTPResponse{
 

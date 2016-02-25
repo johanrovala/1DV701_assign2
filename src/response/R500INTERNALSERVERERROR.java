@@ -4,6 +4,7 @@ import java.io.IOException;
 
 /**
  * Created by johanrovala on 19/02/16.
+ * General response if none of our earlier responses are created.
  */
 public class R500INTERNALSERVERERROR extends HTTPResponse{
     public static final String STATUS = "HTTP/1.1 500 INTERNAL SERVER ERROR";

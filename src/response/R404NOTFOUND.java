@@ -4,6 +4,7 @@ import java.io.IOException;
 
 /**
  * Created by johanrovala on 19/02/16.
+ * If Path does not exist within our directory, an instance of this class is created.
  */
 public class R404NOTFOUND extends HTTPResponse
 {

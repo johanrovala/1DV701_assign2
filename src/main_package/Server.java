@@ -6,6 +6,8 @@ import java.net.Socket;
 
 /**
  * Created by johanrovala on 15/02/16.
+ * Main class. Waits for a client to try to connect. If successfull start a new instance of Session
+ *
  */
 public class Server
 {

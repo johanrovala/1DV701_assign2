@@ -5,6 +5,7 @@ import utilities.IOHelper;
 
 /**
  * Created by johanrovala on 16/02/16.
+ * This class helps us work with the input gathered from the client and creates a POJO Request object.
  */
 public class RequestParser
 {

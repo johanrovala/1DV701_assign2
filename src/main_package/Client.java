@@ -7,6 +7,8 @@ import java.net.Socket;
 
 /**
  * Created by johanrovala on 17/02/16.
+ * This class holds most of the important information about our client, mostly regarding I/O streams.
+ *
  */
 public class Client {
 
