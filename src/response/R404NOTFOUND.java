@@ -8,7 +8,7 @@ import java.io.IOException;
 public class R404NOTFOUND extends HTTPResponse
 {
     public static final String STATUS = "HTTP/1.1 404 NOT FOUND";
-    public static final String bodyStr = "<h1>404 File not found sorry :)</h1>";
+    public static final String bodyStr = "<h1>404 File not found</h1>";
 
     public R404NOTFOUND(boolean keep_alive) throws IOException
     {

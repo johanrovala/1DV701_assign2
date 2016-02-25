@@ -11,7 +11,9 @@ public class AllowedPaths
             {
                     "src/html/index.html",
                     "src/png/alex.png",
-                    "src/png/fishy.png"
+                    "src/png/fishy.png",
+                    "src/html",
+                    "src/png"
             };
 
     public static boolean canAccessPath(String path)

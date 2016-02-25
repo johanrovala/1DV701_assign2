@@ -8,7 +8,7 @@ import java.io.IOException;
 public class R403FORBIDDEN extends HTTPResponse{
 
     public static final String STATUS = "HTTP/1.1 403 FORBIDDEN";
-    public static final String bodyStr = "<h1>403 You're not allowed here LOL ;))</h1>";
+    public static final String bodyStr = "<h1>403 You're not allowed here</h1>";
 
     public R403FORBIDDEN(boolean keep_alive) throws IOException
     {

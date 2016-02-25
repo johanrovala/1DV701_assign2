@@ -74,7 +74,15 @@ public class IOHelper
                 return true;
             }
         }
+        return false;
+    }
 
+    public boolean pathContainsFile(String path){
+        for (int i = 0; i < path.length(); i++){
+            if(path.charAt(i) == '.'){
+                return true;
+            }
+        }
         return false;
     }
 }

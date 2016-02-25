@@ -44,7 +44,7 @@ public class Session extends Thread{
             System.out.println("Probably browser try to access logo but");
         }
 
-        try  {  client.close();}
+        try  {  client.close(); }
         catch (IOException e) {e.printStackTrace();}
     }
 }

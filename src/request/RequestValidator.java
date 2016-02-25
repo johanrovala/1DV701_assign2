@@ -44,8 +44,14 @@ public class RequestValidator {
 
         if(fileExists(request.getPath()) && ioHelper.isAllowedDir(request.getPath()))
         {
-            System.out.println("File with path " + request.getPath() + " exists and gets returned." );
-            return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
+            if(ioHelper.pathContainsFile(request.getPath())){
+                System.out.println("File with path " + request.getPath() + " exists and gets returned." );
+                return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
+            }
+            else {
+                System.out.println("User tries to access dir " + request.getPath() + " and gets redirected to index.html" );
+                return new R200OK(Paths.get("src/html/index.html"), getContentType("src/html/index.html"), true);
+            }
         }
         else if(!ioHelper.isAllowedDir(request.getPath()))
         {
