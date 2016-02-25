@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 /**
- * Created by Steve on 2016-02-18.
+ * Created by Jakob on 2016-02-18.
+ * Abstract super class for all HTTP responses. Very simple in structure,
+ * simply consists of an http header and an http body.
  */
 public abstract class HTTPResponse
 {
@@ -30,6 +32,11 @@ public abstract class HTTPResponse
         return out;
     }
 
+    /**
+     * The method that's mainly used. It returns a two dimensional byte array
+     * with the first byte array containing the header and the second the body.
+     * @return two dimensional byte array containing header and body.
+     */
     public byte[][] getBytes()
     {
         byte[][] out = {header.toBytes(), body.getBody()};

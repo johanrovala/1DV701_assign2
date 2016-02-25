@@ -4,13 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
- * Created by Steve on 2016-02-18.
+ * Created by Jakob on 2016-02-18.
+ * This is the http header for http responses. Currently we limit
+ * the responses to status line, general headers and entity headers.
  */
 public class HTTPHeader
 {
     private String statusLine;
     private String generalHeaders;
-    //Currently no response_old header
     private String entityHeaders;
 
     public HTTPHeader(String status, boolean keep_alive_in, HTTPBody body)

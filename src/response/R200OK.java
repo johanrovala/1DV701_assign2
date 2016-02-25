@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 /**
- * Created by Steve on 2016-02-18.
+ * Created by Jakob on 2016-02-18.
+ * The mainly used response, namely 200 ok. Have two different constructors
+ * corresponding to the constructor of the super class.
  */
 public class R200OK extends HTTPResponse
 {

@@ -1,4 +1,4 @@
-package balle;
+package main_package;
 
 import request.Request;
 import request.RequestParser;
@@ -14,10 +14,12 @@ import java.net.Socket;
 public class Session extends Thread{
 
     Client client;
+    boolean canViewPreCon;      //If this is set a user can view the five times page
     private RequestParser requestParser;
 
-    public Session(Socket s) throws IOException
+    public Session(Socket s, boolean preConMet) throws IOException
     {
+        canViewPreCon = preConMet;
         client = new Client(s);
     }
 
@@ -36,7 +38,7 @@ public class Session extends Thread{
         HTTPResponse response;
         try
         {
-            response = requestValidator.getResponse();
+            response = requestValidator.getResponse(canViewPreCon);
             client.sendResponseToClient(response);
         }
         catch (IOException e)

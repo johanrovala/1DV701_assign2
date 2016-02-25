@@ -15,6 +15,7 @@ public class RequestValidator {
      * Fields
      */
 
+    private static boolean canViewSecretPage = false;
     IOHelper ioHelper;
     Request request;
 
@@ -28,7 +29,7 @@ public class RequestValidator {
     }
 
     private boolean isGet(String requestType){
-        return requestType.equals(HTTP_RequestType.GET);
+        return requestType.equals("GET");
     }
 
     private boolean isPost(String requestType){
@@ -40,18 +41,20 @@ public class RequestValidator {
     }
 
 
-    public HTTPResponse getResponse() throws IOException {
-
+    public HTTPResponse getResponse(boolean canView5timesPage) throws IOException
+    {
+        if (!isGet(request.getRequestType()))
+        {
+            System.out.println("IT'S A GET REQUEST!!!");
+            return new R405METHODNOTALLOWED(false);
+        }
+        if (request.getPath().contains("brew") && request.getPath().contains("coffee"))
+        {
+            return new R418IMATEAPOT(false);
+        }
         if(fileExists(request.getPath()) && ioHelper.isAllowedDir(request.getPath()))
         {
-            if(ioHelper.pathContainsFile(request.getPath())){
-                System.out.println("File with path " + request.getPath() + " exists and gets returned." );
-                return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
-            }
-            else {
-                System.out.println("User tries to access dir " + request.getPath() + " and gets redirected to index.html" );
-                return new R200OK(Paths.get("src/html/index.html"), getContentType("src/html/index.html"), true);
-            }
+            return properResponse(request, canView5timesPage);
         }
         else if(!ioHelper.isAllowedDir(request.getPath()))
         {
@@ -69,6 +72,37 @@ public class RequestValidator {
         {
             return new R500INTERNALSERVERERROR(true);
         }
+    }
+
+    private HTTPResponse properResponse(Request request, boolean canView5timesPage) throws IOException
+    {
+        if (request.getPath().contains("fiveTimes"))
+        {
+            System.out.println("The fivetimes file was requested");
+            if (!canView5timesPage)
+            {
+                System.out.println("The system doesn't think the user can see the fivetimes file");
+                return new R412PRECONDITIONFAILED(true);
+            }
+        }
+        else if(request.getPath().equals("src/html/secretpage.html"))
+        {
+            System.out.println("User tries to access the secret page");
+            if (!canViewSecretPage)
+            {
+                return new R402PAYMENTREQUIRED(false);
+            }
+            else
+            {
+                return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
+            }
+        }
+        System.out.println("File with path " + request.getPath() + " exists and gets returned." );
+        if (request.getPath().equals("src/html/jakobandjohanwillgetAforassignment2.html"))
+        {
+            canViewSecretPage = true;
+        }
+        return new R200OK(Paths.get(request.getPath()), getContentType(request.getPath()), true);
     }
 
     private CONTENT_TYPE getContentType(String pathOfFile)

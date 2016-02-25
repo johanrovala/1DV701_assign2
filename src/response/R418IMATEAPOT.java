@@ -3,7 +3,7 @@ package response;
 import java.io.IOException;
 
 /**
- * Created by Steve on 2016-02-24.
+ * Created by Jakob on 2016-02-24.
  */
 public class R418IMATEAPOT extends HTTPResponse
 {

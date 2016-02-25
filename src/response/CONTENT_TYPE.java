@@ -2,7 +2,7 @@ package response;
 
 /**
  * Created by Jakob on 2016-02-16.
- * ENUM for content types to simplify for person using the responses
+ * ENUM for relevant content types of the application.
  */
 public enum CONTENT_TYPE
 {

@@ -3,7 +3,9 @@ package response;
 import java.io.IOException;
 
 /**
- * Created by Steve on 2016-02-24.
+ * Created by Jakob on 2016-02-24.
+ * To see when this is activated start the server and try to access the fiveTimes.html
+ * page. After 3 times you should be able to get the following response
  */
 public class R412PRECONDITIONFAILED extends HTTPResponse
 {
