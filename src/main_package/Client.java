@@ -32,10 +32,29 @@ public class Client {
 
     public String getInputFromSockStream() throws IOException
     {
+        /*Uncomment the following line to use putty as a client*/
+        //return readPuttyInput();
         InputStream inputStream = client.getInputStream();
         inputStream.read(buf);
         String request = new String(buf);
         System.out.println("\n\nThe actual request from the stream: \n" + request + "\n\n" );
+        return request;
+    }
+
+    private String readPuttyInput() throws IOException
+    {
+        /* ONLY FOR PUTTY CLIENT*/
+        BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        String fromPutty = "";
+        String line = reader.readLine();
+        System.out.println("Waiting for input from pewty");
+        while (line != null && !fromPutty.contains("GET") && !fromPutty.contains("HTTP/1.1"))
+        {
+            fromPutty += line;
+            line = reader.readLine();
+        }
+        String request = fromPutty;
+        System.out.println("Received from putty: " + fromPutty);
         return request;
     }
 

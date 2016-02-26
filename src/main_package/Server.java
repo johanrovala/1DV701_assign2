@@ -1,6 +1,7 @@
 package main_package;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,7 +24,8 @@ public class Server
     public static void main(String[] args) throws IOException
     {
 
-        serverSocket = new ServerSocket(PORT);
+        serverSocket = new ServerSocket();
+        serverSocket.bind(new InetSocketAddress("127.0.0.1", PORT));
         System.out.println(serverSocket.getLocalSocketAddress());
 
         while (true)
